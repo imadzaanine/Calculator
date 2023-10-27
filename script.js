@@ -13,12 +13,14 @@ const addButton = document.getElementsByClassName("add")[0]
 const subButton = document.getElementsByClassName("sub")[0]
 const multiButton = document.getElementsByClassName("multi")[0]
 
+let operations = [];
+let operationNumber = 0
 
 function add(a,b){
     return a+b;
 }
 function sub(a,b){
-    return a-b
+    return a-b;
 }
 function multi(a,b){
     return a*b;
@@ -30,8 +32,20 @@ function dev(a,b){
 }
 
 function display(number){
-    displayed.innerHTML = displayed.innerHTML + number;
+    if (displayed.innerHTML == 0) {
+        displayed.innerHTML = number;
+    }
+    else{
+    displayed.innerHTML = displayed.innerHTML + number;}
 }
+function clear(){
+    displayed.innerHTML = 0 ;
+    while (operations.length > 0) {
+        operations.pop();
+    }
+    operationNumber= 0;
+}
+
 
 zero.onclick = function(){display(this.innerHTML)};
 one.onclick = function(){display(this.innerHTML)};
@@ -43,5 +57,19 @@ six.onclick = function(){display(this.innerHTML)};
 seven.onclick = function(){display(this.innerHTML)};
 eight.onclick = function(){display(this.innerHTML)};
 nine.onclick = function(){display(this.innerHTML)};
+addButton.onclick = function(){
+    if (operationNumber > 0) {
+    operations[operationNumber] = Number(displayed.innerHTML);
+    const resault = add(operations[operationNumber],operations[operationNumber-1]);
+    operationNumber ++;
+    displayed.innerHTML = resault;
+    }else{
+        operations[operationNumber] = Number(displayed.innerHTML);
+        operationNumber ++;
+        displayed.innerHTML= null;
+    }
+
+}
+
 
 
