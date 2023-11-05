@@ -16,7 +16,7 @@ numbers.querySelectorAll("button").forEach(function(button) {
 });
 
 function pending() {
-    currentValue =  pendingFunction(pendingValue , Number(currentValue));
+    currentValue =  pendingFunction(pendingValue , Number(result.innerHTML));
     pendingFunction = null ;
     pendingValue = 0
 }
@@ -48,9 +48,7 @@ document.getElementById("add").addEventListener("click", function () {
     pendingFunction = add; 
     currentValue = "";
     updateresult();
-    console.log(pendingValue);
   } else {
-    console.log(pendingValue);
     pending();
     updateresult();
   }
