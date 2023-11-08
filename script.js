@@ -7,7 +7,7 @@ let pendingValue = 0;
 const numbers = document.getElementById("nums");
 numbers.querySelectorAll("button").forEach(function(button) {
   button.addEventListener("click", function () {
-    if (result !== "0") {
+    if (result.innerHTML !== "0") {
       result.innerHTML += button.innerHTML
     }else{
       result.innerHTML = button.innerHTML
@@ -15,11 +15,16 @@ numbers.querySelectorAll("button").forEach(function(button) {
   })
 });
 
-function pending() {
+function pending(a) {
+  if (pendingFunction == null) {
+    pendingValue = Number(result.innerHTML);
+    pendingFunction = a; 
+    currentValue = "";
+  }else{
     currentValue =  pendingFunction(pendingValue , Number(result.innerHTML));
-    pendingFunction = null ;
+    pendingFunction = a ;
     pendingValue = 0
-}
+}}
 
 function updateresult() {
   result.innerHTML = currentValue
@@ -43,13 +48,7 @@ function dev(a,b) {
 }
 
 document.getElementById("add").addEventListener("click", function () {
-  if (pendingFunction == null) {
-    pendingValue = Number(result.innerHTML);
-    pendingFunction = add; 
-    currentValue = "";
+    pending(add);
     updateresult();
-  } else {
-    pending();
-    updateresult();
-  }
+  
 });
